@@ -1,0 +1,59 @@
+@baseUrl = http://localhost:8080/api
+@contentType = application/json
+@accept = application/json
+# /oauth/client-credentialsを先に叩くこと
+@clientId = Bearer {{secret.response.body.$.client_id}}
+@clientSecret = Bearer {{secret.response.body.$.client_secret}}
+# /oauth/tokenを先に叩くこと
+@token = Bearer {{signin.response.body.$.access_token}}
+
+### シークレット情報取得
+# @name secret
+GET {{baseUrl}}/oauth/client-credentials HTTP/1.1
+Content-Type: {{contentType}}
+Accept: {{accept}}
+
+### サインアップ
+POST {{baseUrl}}/signup HTTP/1.1
+Content-Type: {{contentType}}
+Accept: {{accept}}
+
+{
+  "email": "hoge@fuga.com",
+  "password": "password",
+  "nickname": "test-user"
+}
+
+### サインイン
+# @name signin
+POST {{baseUrl}}/oauth/token HTTP/1.1
+Content-Type: {{contentType}}
+Accept: {{accept}}
+
+{
+  "grant_type": "password",
+  "client_id": 1,
+  "client_secret": "1SqPhtQn4Pm3eLPoMVCm2rOMeZ4LC4DtjFc54yDW",
+  "username": "kiyopikko@test.com",
+  "password": "password",
+  "scope": "*"
+}
+
+### ユーザー情報取得
+GET {{baseUrl}}/me HTTP/1.1
+Content-Type: {{contentType}}
+Accept: {{accept}}
+Authorization: {{token}}
+
+### ユーザー画像登録
+POST {{baseUrl}}/me/image HTTP/1.1
+Accept: {{accept}}
+Authorization: {{token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="test.png"
+Content-Type: image/png
+
+< ./test.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

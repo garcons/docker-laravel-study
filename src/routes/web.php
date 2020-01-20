@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'success'; // ヘルスチェック用
 });
+
+Route::get('/friend/image/{userId}', 'Web\ImageController@show')->name('web.image.get');
