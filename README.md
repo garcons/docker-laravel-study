@@ -32,7 +32,13 @@
 
 ### docker コンテナにログインするとき
 
-`docker exec -it test-php-fpm sh`
+`docker exec -it test-php-fpm /bin/ash`
+
+### test を実行するとき
+
+docker コンテナにログインしている状態(tests/の後ろは流したいテスト)
+
+`./vendor/bin/phpunit tests/Unit/Facades/DistanceTest.php`
 
 # 用意するもの
 
