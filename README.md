@@ -12,7 +12,7 @@
    1. `chmod -R a+w src/storage/*`
    1. `docker-compose run composer install --prefer-dist --no-interaction`
    1. `docker-compose exec php-fpm php artisan key:generate`
-1. http://localhost:8080/　にアクセスしたら Laravel の画面がでれば OK
+1. [http://localhost:8080/](http://localhost:8080/)にアクセスし、Laravel の画面がでれば OK
 
 # コマンドリファレンス
 
@@ -36,7 +36,7 @@
 
 ### test を実行するとき
 
-docker コンテナにログインしている状態(tests/の後ろは流したいテスト)
+docker コンテナにログインしている状態(tests/の後ろは流したいテストファイル。ディレクトリ指定で配下の xxxTest.php を全部テスト。)
 
 `./vendor/bin/phpunit tests/Unit/Facades/DistanceTest.php`
 
